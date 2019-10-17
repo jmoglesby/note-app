@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 import Nav from './components/Nav';
 import List from './components/List';
@@ -10,6 +11,12 @@ class App extends Component {
     this.state = {
       showNote: false
     };
+  }
+
+  getNotes = () => {
+    axios.get('https://note-api-jeremy-oglesby.herokuapp.com/notes')
+      .then( (res) => console.log(res.data) )
+      .catch( (err) => console.log(err.response.data) );
   }
 
   toggleNote = () => {
@@ -24,7 +31,7 @@ class App extends Component {
     return (
       <div className="App">
         <Nav toggleNote={this.toggleNote} showNote={showNote} />
-        { showNote ? <Note /> : <List /> }
+        { showNote ? <Note /> : <List getNotes={this.getNotes} /> }
       </div>
     );
   }
