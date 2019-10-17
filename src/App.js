@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Nav from './components/Nav';
 import List from './components/List';
 import Note from './components/Note';
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
