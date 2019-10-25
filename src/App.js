@@ -28,15 +28,24 @@ class App extends Component {
       .catch( (err) => console.log(err.response.data) );
   }
 
-  submitNote = (data) => {
-    axios.post( urlFor('notes'), data )
-      .then( (res) => this.setState({ showNote: false }) )
+  submitNote = (data, id) => {
+    this.performSubmissionRequest(data, id)
+      .then( (res) => this.setState({ showNote: false, note: {} }) )
       .catch( (err) => console.log(err.response.data) );
+  }
+
+  performSubmissionRequest = (data, id) => {
+    if (id) {
+      return axios.patch( urlFor(`notes/${id}`), data );
+    } else {
+      return axios.post( urlFor('notes'), data );
+    }
   }
 
   toggleNote = () => {
     this.setState({
-      showNote: ! this.state.showNote
+      showNote: ! this.state.showNote,
+      note: {}
     });
   }
 
