@@ -28,6 +28,10 @@ class App extends Component {
       .catch( (err) => console.log(err.response.data) );
   }
 
+  submitNote = (data) => {
+    console.log(data);
+  }
+
   toggleNote = () => {
     this.setState({
       showNote: ! this.state.showNote
@@ -41,7 +45,7 @@ class App extends Component {
       <div className="App">
         <Nav toggleNote={this.toggleNote} showNote={showNote} />
         { showNote ?
-          <Note note={note} /> :
+          <Note note={note} submitNote={this.submitNote} /> :
           <List getNotes={this.getNotes} getNote={this.getNote} notes={notes} />
         }
       </div>
