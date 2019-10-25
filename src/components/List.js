@@ -7,11 +7,17 @@ class List extends Component {
   }
 
   render() {
-    const { notes, getNote } = this.props;
+    const { notes, getNote, deleteNote } = this.props;
 
     const cards = notes.map((note, index) => {
       return (
-        <NoteCard key={index} index={index} note={note} getNote={getNote} />
+        <NoteCard
+          key={index}
+          index={index}
+          note={note}
+          getNote={getNote}
+          deleteNote={deleteNote}
+        />
       );
     });
 

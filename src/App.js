@@ -42,6 +42,14 @@ class App extends Component {
     }
   }
 
+  deleteNote = (id) => {
+    const newNotesState = this.state.notes.filter( (note) => note.id !== id );
+
+    axios.delete( urlFor(`notes/${id}`) )
+      .then( (res) => this.setState({ notes: newNotesState }) )
+      .catch( (err) => console.log(err.response.data) );
+  }
+
   toggleNote = () => {
     this.setState({
       showNote: ! this.state.showNote,
@@ -57,7 +65,11 @@ class App extends Component {
         <Nav toggleNote={this.toggleNote} showNote={showNote} />
         { showNote ?
           <Note note={note} submitNote={this.submitNote} /> :
-          <List getNotes={this.getNotes} getNote={this.getNote} notes={notes} />
+          <List getNotes={this.getNotes}
+                getNote={this.getNote}
+                notes={notes}
+                deleteNote={this.deleteNote}
+          />
         }
       </div>
     );
