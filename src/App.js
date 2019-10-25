@@ -41,7 +41,10 @@ class App extends Component {
     return (
       <div className="App">
         <Nav toggleNote={this.toggleNote} showNote={showNote} />
-        { showNote ? <Note note={note} /> : <List getNotes={this.getNotes} getNote={this.getNote} notes={notes} /> }
+        { showNote ?
+          <Note note={note} /> :
+          <List getNotes={this.getNotes} getNote={this.getNote} notes={notes} />
+        }
       </div>
     );
   }
