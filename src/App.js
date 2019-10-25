@@ -21,6 +21,10 @@ class App extends Component {
       .catch( (err) => console.log(err.response.data) );
   }
 
+  getNote = () => {
+    console.log('clicked');
+  }
+
   toggleNote = () => {
     this.setState({
       showNote: ! this.state.showNote
@@ -33,7 +37,7 @@ class App extends Component {
     return (
       <div className="App">
         <Nav toggleNote={this.toggleNote} showNote={showNote} />
-        { showNote ? <Note /> : <List getNotes={this.getNotes} notes={notes} /> }
+        { showNote ? <Note /> : <List getNotes={this.getNotes} getNote={this.getNote} notes={notes} /> }
       </div>
     );
   }
