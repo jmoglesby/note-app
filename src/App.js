@@ -12,7 +12,8 @@ class App extends Component {
     this.state = {
       showNote: false,
       notes: [],
-      note: {}
+      note: {},
+      newTag: false
     };
   }
 
@@ -57,18 +58,28 @@ class App extends Component {
     });
   }
 
+  showTagForm = () => {
+    this.setState({ newTag: true });
+  }
+
   render() {
-    const { showNote, notes, note } = this.state;
+    const { showNote, notes, note, newTag } = this.state;
 
     return (
       <div className="App">
         <Nav toggleNote={this.toggleNote} showNote={showNote} />
         { showNote ?
-          <Note note={note} submitNote={this.submitNote} /> :
-          <List getNotes={this.getNotes}
-                getNote={this.getNote}
-                notes={notes}
-                deleteNote={this.deleteNote}
+          <Note
+            note={note}
+            submitNote={this.submitNote}
+            newTag={newTag}
+            showTagForm={this.showTagForm}
+          /> :
+          <List
+            getNotes={this.getNotes}
+            getNote={this.getNote}
+            notes={notes}
+            deleteNote={this.deleteNote}
           />
         }
       </div>
