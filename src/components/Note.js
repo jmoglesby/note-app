@@ -20,6 +20,12 @@ class Note extends Component {
           </i>
         </span>
       );
+    } else {
+      return (
+        <form>
+          <input className="tag-input" type="text" placeholder="Tag Name..." />
+        </form>
+      );
     }
   }
 
