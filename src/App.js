@@ -7,6 +7,7 @@ import Note from './components/Note';
 import urlFor from './helpers/urlFor';
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
