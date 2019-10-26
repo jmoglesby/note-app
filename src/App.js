@@ -4,6 +4,7 @@ import './App.css';
 import Nav from './components/Nav';
 import List from './components/List';
 import Note from './components/Note';
+import Flash from './components/Flash';
 import urlFor from './helpers/urlFor';
 
 class App extends Component {
@@ -14,8 +15,13 @@ class App extends Component {
       showNote: false,
       notes: [],
       note: {},
-      newTag: false
+      newTag: false,
+      error: ''
     };
+  }
+
+  resetError = () => {
+    this.setState({ error: '' });
   }
 
   getNotes = () => {
@@ -33,7 +39,14 @@ class App extends Component {
   submitNote = (data, id) => {
     this.performSubmissionRequest(data, id)
       .then( (res) => this.setState({ showNote: false, note: {} }) )
-      .catch( (err) => console.log(err.response.data) );
+      .catch( (err) => {
+        const { errors } = err.response.data;
+        if (errors.content) {
+          this.setState({ error: 'Missing note content!' });
+        } else if (errors.title) {
+          this.setState({ error: 'Missing note title!' });
+        }
+      });
   }
 
   performSubmissionRequest = (data, id) => {
@@ -70,7 +83,12 @@ class App extends Component {
   submitTag = (data, id) => {
     axios.post( urlFor(`notes/${id}/tags`), data )
       .then( (res) => this.getNote(id) )
-      .catch( (err) => console.log(err.response.data) );
+      .catch( (err) => {
+        const { errors } = err.response.data;
+        if (errors.name) {
+          this.setState({ error: 'Tag missing name!' });
+        }
+      });
   }
 
   deleteTag = (noteId, tagId) => {
@@ -80,12 +98,13 @@ class App extends Component {
   }
 
   render() {
-    const { showNote, notes, note, newTag } = this.state;
+    const { showNote, notes, note, newTag, error } = this.state;
 
     return (
       <div className="App">
         <Nav toggleNote={this.toggleNote} showNote={showNote} />
-        { showNote ?
+        {error && <Flash error={error} resetError={this.resetError} />}
+        {showNote ?
           <Note
             note={note}
             submitNote={this.submitNote}
