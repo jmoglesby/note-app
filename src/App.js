@@ -30,6 +30,14 @@ class App extends Component {
       .catch( (err) => console.log(err.response.data) );
   }
 
+  goHome = () => {
+    this.setState({
+      showNote: false,
+      newTag: false,
+      note: {}
+    })
+  }
+
   getNote = (id) => {
     axios.get(urlFor(`notes/${id}`))
       .then( (res) => this.setState({ note: res.data, showNote: true }) )
@@ -102,7 +110,12 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Nav toggleNote={this.toggleNote} showNote={showNote} />
+        <Nav
+          toggleNote={this.toggleNote}
+          showNote={showNote}
+          goHome={this.goHome}
+          closeTagForm={this.closeTagForm}
+        />
         {error && <Flash error={error} resetError={this.resetError} />}
         {showNote ?
           <Note

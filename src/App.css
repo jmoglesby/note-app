@@ -59,9 +59,6 @@ body {
 
   float: left;
   cursor: pointer;
-  animation-name: move;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
 }
 
 .nav-button {
@@ -78,7 +75,7 @@ body {
   transition: all 0.2s ease-in;
   cursor: pointer;
   box-shadow: 0 8px 30px rgba(0,0,0,0.45);
-  position: absolute;
+  position: fixed;
   bottom: 40px;
   right: 40px;
   z-index: 10;
@@ -113,6 +110,7 @@ body {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25);
   margin-top: 30px;
   margin-bottom: 50px;
+  cursor: pointer;
 }
 
 .note-card-title {
@@ -236,7 +234,7 @@ body {
   text-align: center;
 }
 
-.note-card-edit:hover {
+.note-card-container:hover .note-card-edit {
   color: rgb(79, 198, 85);
   transform: rotate(90deg);
 }
@@ -367,7 +365,7 @@ body {
   font-size: 16px;
   color: rgb(158, 158, 158);
   height: auto;
-  min-width: 150px;
+  min-width: 100px;
   width: 100%;
   white-space: nowrap;
 }
@@ -395,6 +393,19 @@ body {
   text-transform: uppercase;
 }
 
+.tag-span {
+  border-radius: 20px;
+  padding: 4px;
+  padding-right: 8px;
+}
+
+.tag-span:hover {
+  background: rgb(209, 209, 209);
+  color: rgba(109, 93, 20, 0.918);
+  box-shadow: 1px 1px 3px lightslategray;
+  cursor: pointer;
+}
+
 .tag-button {
   background: rgb(158, 158, 158);
   color: white;
@@ -403,17 +414,18 @@ body {
   border-radius: 100%;
   box-shadow: 0 3px 9px rgba(0,0,0,0.1);
   width: 25px;
-  margin-left: 2.5px;
+  margin-right: 4px;
 }
 
-.tag-button:hover {
-  background: rgb(198, 79, 79);
+.tag-span:hover .tag-button {
+  background: rgb(79, 198, 85);
 }
 
 .tag-input {
-  padding-left: 2.5px;
+  padding-left: 8px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   border: none;
+  border-radius: 20px;
   height: 25px;
   width: 100%;
   -webkit-transition: all 0.3s ease-in;
@@ -458,8 +470,9 @@ body {
 }
 
 .tag:hover {
-  background: rgb(198, 79, 79);;
-  color: #333;
+  background: rgb(209, 209, 209);
+  color: rgba(109, 93, 20, 0.918);
+  box-shadow: 1px 1px 3px lightslategray;
 }
 
 .delete {
@@ -483,6 +496,10 @@ body {
 
 .tag:hover .delete {
   opacity: 1;
+}
+
+.delete:hover {
+  color: rgb(198, 79, 79);
 }
 
 .list-container {

@@ -24,11 +24,11 @@ class Note extends Component {
     if (note.id !== undefined) {
       if (!this.props.newTag) {
         return (
-          <span>
-            Tag your note:
-            <i className="tag-button material-icons" onClick={() => this.props.showTagForm()}>
+          <span  className="tag-span" onClick={() => this.props.showTagForm()}>
+            <i className="tag-button material-icons">
               add circle
             </i>
+            tags:
           </span>
         );
       } else {
@@ -37,6 +37,7 @@ class Note extends Component {
             <input
               className="tag-input"
               type="text"
+              autoFocus
               placeholder="Tag Name..."
               ref={(input) => this.tag = input}
             />
@@ -80,7 +81,7 @@ class Note extends Component {
           />
           <input className="note-button"
                 type="submit"
-                value="Submit"
+                value="Save"
           />
         </form>
         <div className="tag-container">
